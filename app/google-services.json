@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "668390859054",
+    "project_id": "letus-a7fb1",
+    "storage_bucket": "letus-a7fb1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668390859054:android:0d0cd15318af40e934dabf",
+        "android_client_info": {
+          "package_name": "com.example.letus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "668390859054-3069ntqfqngq0hm0h537kq0r72igunnl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6AzOv6rdRNlqnv4utSunLUI2sEndQ8Gc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "668390859054-3069ntqfqngq0hm0h537kq0r72igunnl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
