@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Himezaki/AndroidStudioProjects/LetUsDiscuss/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Himezaki/AndroidStudioProjects/LetUsDiscuss/app/src/main/res/layout/activity_profile.xml" value="0.1" />
+        <entry key="..\:/Users/Himezaki/AndroidStudioProjects/LetUsDiscuss/app/src/main/res/layout/activity_signup.xml" value="0.1" />
         <entry key="..\:/Users/chris/StudioProjects/LetUs/app/src/main/res/drawable/ic_lLetsUS_background.xml" value="0.142" />
         <entry key="..\:/Users/chris/StudioProjects/LetUs/app/src/main/res/drawable/ic_letUs_background.xml" value="0.142" />
         <entry key="..\:/Users/chris/StudioProjects/LetUs/app/src/main/res/drawable/login.xml" value="0.303" />
