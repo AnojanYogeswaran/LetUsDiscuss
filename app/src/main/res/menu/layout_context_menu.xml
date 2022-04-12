@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Delete discussion"
+        android:id="@+id/menuItem_delete"
+        />
+    <item
+        android:title="Archive discussion"
+        android:id="@+id/menuItem_Archive"
+        />
+    <item
+        android:title="Mute discussion"
+        android:id="@+id/menuItem_Mute"
+        />
+</menu>
