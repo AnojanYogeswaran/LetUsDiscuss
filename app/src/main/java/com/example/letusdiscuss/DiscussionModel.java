@@ -1,4 +1,4 @@
-package com.example.mywhatapps;
+package com.example.letusdiscuss;
 
 import android.provider.ContactsContract;
 import android.widget.ImageView;
