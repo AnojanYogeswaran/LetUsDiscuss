@@ -3,6 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Himezaki/AndroidStudioProjects/LetUsDiscuss/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/Himezaki/AndroidStudioProjects/LetUsDiscuss/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/Himezaki/AndroidStudioProjects/LetUsDiscuss/app/src/main/res/drawable/ic_letusdiscuss_background.xml" value="0.1" />
+        <entry key="..\:/Users/Himezaki/AndroidStudioProjects/LetUsDiscuss/app/src/main/res/drawable/login.xml" value="0.1" />
+        <entry key="..\:/Users/Himezaki/AndroidStudioProjects/LetUsDiscuss/app/src/main/res/drawable/logo_lud_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/Himezaki/AndroidStudioProjects/LetUsDiscuss/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Himezaki/AndroidStudioProjects/LetUsDiscuss/app/src/main/res/layout/activity_message.xml" value="0.2078804347826087" />
+        <entry key="..\:/Users/Himezaki/AndroidStudioProjects/LetUsDiscuss/app/src/main/res/layout/activity_signup.xml" value="0.1" />
+        <entry key="..\:/Users/Himezaki/AndroidStudioProjects/LetUsDiscuss/app/src/main/res/layout/item_message_me.xml" value="0.13145896656534956" />
+        <entry key="..\:/Users/Himezaki/AndroidStudioProjects/LetUsDiscuss/app/src/main/res/layout/item_message_other.xml" value="0.13145896656534956" />
         <entry key="..\:/Users/chris/StudioProjects/LetUs/app/src/main/res/drawable/ic_lLetsUS_background.xml" value="0.142" />
         <entry key="..\:/Users/chris/StudioProjects/LetUs/app/src/main/res/drawable/ic_letUs_background.xml" value="0.142" />
         <entry key="..\:/Users/chris/StudioProjects/LetUs/app/src/main/res/drawable/login.xml" value="0.303" />
