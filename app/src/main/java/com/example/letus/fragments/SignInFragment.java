@@ -2,6 +2,8 @@ package com.example.letus.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.letus.R;
 import com.example.letus.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.sql.DatabaseMetaData;
+import java.util.regex.Pattern;
 
 public class SignInFragment extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,8 +42,7 @@ public class SignInFragment extends AppCompatActivity implements View.OnClickLis
     private CheckBox checkBoxAgree;
     private Button buttonCreateAcc;
     User user;
-
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://letus-a7fb1-default-rtdb.firebaseio.com/");
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -51,44 +57,49 @@ public class SignInFragment extends AppCompatActivity implements View.OnClickLis
         checkBoxAgree = (CheckBox) findViewById(R.id.checkbox_agree);
         buttonCreateAcc = (Button) findViewById(R.id.buttonSaveContact);
         buttonCreateAcc.setOnClickListener(this);
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
     public void onClick(View view) {
-        final String login = editTextLogin.getText().toString();
-        final String Password = editTextPassword.getText().toString();
-        final String ConfirmPassword = editTextConfirmPassword.getText().toString();
-        final String Email = editTextEmail.getText().toString();
-        final String BirthDate = editTextBirthDate.getText().toString();
-
-        if (login.isEmpty() || Password.isEmpty() || ConfirmPassword.isEmpty() ||
-                Email.isEmpty() || BirthDate.isEmpty()) {
-           Toast.makeText(view.getContext(),
-                   "Tout les champs nécessaires", Toast.LENGTH_SHORT).show();
-        } else {
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                if(snapshot.child("users").hasChild(login)) {
-                    Toast.makeText(view.getContext() , "Identifiant déjà utilisé" , Toast.LENGTH_SHORT).show();
-                } else {
-                    databaseReference.child("users").child(login).setValue(login);
-                    databaseReference.child("users").child(login).setValue(Password);
-                    databaseReference.child("users").child(login).setValue(login);
-                    Toast.makeText(view.getContext() , "Création de compte réussi" , Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(SignInFragment.this, ProfileFragment.class);
-                    intent.putExtra("name" , login);
-                    startActivity(intent);
-                }
+            switch (view.getId())  {
+                case R.id.buttonSaveContact:
+                    registerUser();
+                    break;
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+    }
 
+    private void registerUser() {
+    String Email = editTextEmail.getText().toString();
+    String Login = editTextLogin.getText().toString();
+    String Password = editTextPassword.getText().toString();
+    String ConfirmPass = editTextConfirmPassword.getText().toString();
+    String birthDate = editTextBirthDate.getText().toString();
+
+    if(Email.isEmpty() || Login.isEmpty() || Password.isEmpty() || ConfirmPass.isEmpty() || birthDate.isEmpty()) {
+        Toast.makeText(SignInFragment.this , "Tous les champs sont requis" , Toast.LENGTH_SHORT).show();
+
+    }
+    mAuth.createUserWithEmailAndPassword(Email , Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        @Override
+        public void onComplete(@NonNull Task<AuthResult> task) {
+            if(task.isSuccessful()) {
+                User user = new User(Login , Email , Password , birthDate);
+                FirebaseDatabase.getInstance().getReference("users")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()) {
+                        Toast.makeText(SignInFragment.this ,"Utilisateur Créer", Toast.LENGTH_SHORT).show();
+                        Intent intent = new  Intent(SignInFragment.this , ProfileFragment.class);
+                        startActivity(intent);
+                        }
+                    }
+                });
             }
-        });
         }
+    });
     }
 }

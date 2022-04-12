@@ -28,7 +28,7 @@
         android:textAppearance="@style/sign_in" />
 
     <EditText
-        android:id="@+id/login"
+        android:id="@+id/email"
         android:layout_width="220dp"
         android:layout_height="48dp"
         android:layout_alignParentLeft="true"
@@ -37,7 +37,7 @@
         android:layout_marginTop="320dp"
         android:layout_weight="1"
         android:background="@drawable/login"
-        android:hint="Login"
+        android:hint="Email"
         android:padding="10dp"
         android:textColor="#A0A0A0" />
 

@@ -6,12 +6,15 @@ public class User {
     private String password;
     private String birthDate;
 
-    public User(String email, String login, String password, String birthDate) {
-        this.Email = email;
+    public User() {
+
+    }
+
+    public User(String login, String Email , String password, String birthDate) {
         this.login = login;
+        this.Email = Email;
         this.password = password;
         this.birthDate = birthDate;
-
     }
 
     public String getEmail() {
