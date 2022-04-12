@@ -73,7 +73,7 @@ public class SignInFragment extends AppCompatActivity implements View.OnClickLis
                 if(snapshot.child("users").hasChild(login)) {
                     Toast.makeText(view.getContext() , "Identifiant déjà utilisé" , Toast.LENGTH_SHORT).show();
                 } else {
-                    databaseReference.child("users").child(login).setValue(Email);
+                    databaseReference.child("users").child(login).setValue(login);
                     databaseReference.child("users").child(login).setValue(Password);
                     databaseReference.child("users").child(login).setValue(login);
                     Toast.makeText(view.getContext() , "Création de compte réussi" , Toast.LENGTH_SHORT).show();
