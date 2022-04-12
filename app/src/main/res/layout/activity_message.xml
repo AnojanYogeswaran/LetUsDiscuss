@@ -76,7 +76,7 @@
             android:layout_alignParentEnd="true"
             android:background="?attr/selectableItemBackground"
             android:text="Send"
-            android:textColor="5271FF" />
+            android:textColor="#5271FF" />
     </RelativeLayout>
 
 
