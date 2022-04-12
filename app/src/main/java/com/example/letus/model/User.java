@@ -16,6 +16,4 @@ public class User {
         this.birthDate = birthDate;
     }
 
-
-
 }
