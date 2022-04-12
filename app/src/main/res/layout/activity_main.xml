@@ -11,8 +11,8 @@
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="396dp"
-        android:layout_marginTop="35dp"
         android:layout_height="196dp"
+        android:layout_marginTop="35dp"
         app:srcCompat="@mipmap/ic_letusdiscuss_foreground" />
 
     <TextView
@@ -64,8 +64,7 @@
         android:layout_marginLeft="80dp"
         android:layout_marginTop="401dp"
         android:layout_marginBottom="182dp"
-        android:background="@drawable/login"
-        android:backgroundTint="#C4C4C4"
+        android:backgroundTint="#5271FF"
         android:text="Log in" />
 
     <Button
@@ -77,8 +76,7 @@
         android:layout_marginLeft="78dp"
         android:layout_marginTop="401dp"
         android:layout_marginBottom="121dp"
-        android:background="@drawable/login"
-        android:backgroundTint="#C4C4C4"
+        android:backgroundTint="#5271FF"
         android:text="Create Account" />
 
     <TextView
@@ -87,8 +85,8 @@
         android:layout_height="22dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="81dp"
-        android:layout_marginTop="591dp"
+        android:layout_marginLeft="78dp"
+        android:layout_marginTop="624dp"
         android:gravity="center_horizontal|top"
         android:text="@string/forgot_pass"
         android:textAppearance="@style/forgot_pass" />
