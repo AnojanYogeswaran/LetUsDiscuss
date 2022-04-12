@@ -60,15 +60,6 @@ public class SignInFragment extends AppCompatActivity implements View.OnClickLis
         mAuth = FirebaseAuth.getInstance();
     }
 
-    @Override
-    public void onClick(View view) {
-            switch (view.getId())  {
-                case R.id.buttonSaveContact:
-                    registerUser();
-                    break;
-            }
-
-    }
 
     private void registerUser() {
     String Email = editTextEmail.getText().toString();
@@ -79,13 +70,13 @@ public class SignInFragment extends AppCompatActivity implements View.OnClickLis
 
     if(Email.isEmpty() || Login.isEmpty() || Password.isEmpty() || ConfirmPass.isEmpty() || birthDate.isEmpty()) {
         Toast.makeText(SignInFragment.this , "Tous les champs sont requis" , Toast.LENGTH_SHORT).show();
-
+            return;
     }
     mAuth.createUserWithEmailAndPassword(Email , Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
         @Override
         public void onComplete(@NonNull Task<AuthResult> task) {
             if(task.isSuccessful()) {
-                User user = new User(Login , Email , Password , birthDate);
+                User user = new User(Login , Email , birthDate);
                 FirebaseDatabase.getInstance().getReference("users")
                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -93,13 +84,26 @@ public class SignInFragment extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()) {
                         Toast.makeText(SignInFragment.this ,"Utilisateur Créer", Toast.LENGTH_SHORT).show();
-                        Intent intent = new  Intent(SignInFragment.this , ProfileFragment.class);
+                        Intent intent = new  Intent(SignInFragment.this , MessageFragment.class);
                         startActivity(intent);
+                        }
+                        else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(SignInFragment.this, "Error"+ task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
             }
         }
     });
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case    R.id.buttonSaveContact:
+                registerUser();
+                break;
+        }
     }
 }
