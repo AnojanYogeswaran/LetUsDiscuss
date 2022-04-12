@@ -1,4 +1,4 @@
-package com.example.letusdiscuss;
+package com.example.letus;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.mywhatapps.R;
+
+import com.example.letus.model.DiscussionModel;
 
 import java.util.ArrayList;
 
@@ -47,8 +48,8 @@ public class DiscussionAdapter extends BaseAdapter {
         TextView firstname= view.findViewById(R.id.textViewItemPrenom);
         firstname.setText(discussions.get(i).getFirstname());
 
-        TextView lastmessage = view.findViewById(R.id.textViewItemPreviewMessage);
-        lastmessage.setText(discussions.get(i).getLastmessage());
+        TextView lastMessage = view.findViewById(R.id.textViewItemPreviewMessage);
+        lastMessage.setText(discussions.get(i).getLastmessage());
 
         TextView date = view.findViewById(R.id.textViewItemDate);
         date.setText(discussions.get(i).getDate());

@@ -1,4 +1,4 @@
-package com.example.letusdiscuss;
+package com.example.letus.model;
 
 import android.provider.ContactsContract;
 import android.widget.ImageView;

@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LetUs">
         <activity
-            android:name="com.example.letusdiscuss.MainActivity"
+            android:name="com.example.letus.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
