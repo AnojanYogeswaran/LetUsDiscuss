@@ -13,7 +13,7 @@
         android:layout_width="396dp"
         android:layout_height="196dp"
         android:layout_marginTop="35dp"
-        app:srcCompat="@mipmap/ic_letusdiscuss_foreground" />
+        app:srcCompat="@drawable/logo" />
 
     <TextView
         android:id="@+id/sign_in"
@@ -38,6 +38,7 @@
         android:layout_weight="1"
         android:background="@drawable/login"
         android:hint="Email"
+        android:inputType="textEmailAddress"
         android:padding="10dp"
         android:textColor="#A0A0A0" />
 
@@ -49,8 +50,10 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="78dp"
         android:layout_marginTop="388dp"
+        android:layout_marginBottom="70dp"
         android:background="@drawable/login"
         android:hint="Password"
+        android:inputType="textPassword"
         android:padding="10dp"
         android:textColor="#A0A0A0" />
 

@@ -9,20 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.letus.fragments.ProfileFragment;
 import com.example.letus.fragments.SignInFragment;
-import com.example.letus.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -63,11 +57,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser user = nAuth.getCurrentUser();
-        if( user == null) {
-            startActivity(new Intent(MainActivity.this , MainActivity.class));
+        if(user != null){
+            user.reload();
         }
     }
 
