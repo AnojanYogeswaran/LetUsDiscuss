@@ -11,12 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.letus.R;
@@ -52,6 +54,9 @@ public class SignInFragment extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        buttonCreateAcc = (Button) findViewById(R.id.buttonSaveContact);
+        buttonCreateAcc.setOnClickListener(this);
+        mAuth = FirebaseAuth.getInstance();
         editTextLogin =  (EditText) findViewById(R.id.login);
         editTextPassword =  (EditText) findViewById(R.id.password);
         editTextConfirmPassword = (EditText) findViewById(R.id.confirmPassword);
@@ -117,9 +122,17 @@ public class SignInFragment extends AppCompatActivity implements View.OnClickLis
             public void afterTextChanged(Editable s) {}
         });
         checkBoxAgree = (CheckBox) findViewById(R.id.checkbox_agree);
-        buttonCreateAcc = (Button) findViewById(R.id.buttonSaveContact);
-        buttonCreateAcc.setOnClickListener(this);
-        mAuth = FirebaseAuth.getInstance();
+        checkBoxAgree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                   buttonCreateAcc.setBackgroundTintList(ContextCompat.getColorStateList(SignInFragment.this, R.color.blue));
+                }
+                else{
+                    buttonCreateAcc.setBackgroundTintList(ContextCompat.getColorStateList(SignInFragment.this, R.color.gray));
+                }
+            }
+        });
     }
 
 
