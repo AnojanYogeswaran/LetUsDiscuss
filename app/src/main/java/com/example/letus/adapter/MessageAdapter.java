@@ -35,7 +35,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
     public MessageAdapter(Context context, List<MessageModel> messageList) {
         mContext = context;
         mMessageList = messageList;
-        this.user = FirebaseAuth.getInstance().getCurrentUser();
+
     }
 
     @Override
@@ -95,7 +95,6 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
         SentMessageHolder(View itemView) {
             super(itemView);
-
             messageText = (TextView) itemView.findViewById(R.id.text_gchat_message_me);
             timeText = (TextView) itemView.findViewById(R.id.text_gchat_date_me);
         }

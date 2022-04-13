@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    tools:context="com.example.letusdiscuss.MainActivity">
+    tools:context="com.example.letus.MainActivity">
 
     <ImageView
         android:id="@+id/imageViewItemProfile"
