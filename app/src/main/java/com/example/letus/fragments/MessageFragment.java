@@ -35,15 +35,11 @@ public class MessageFragment extends AppCompatActivity {
     private MessageAdapter mMessageAdapter;
     ArrayList<MessageModel> messageList = new ArrayList<MessageModel>();
     User user;
-    DatabaseReference reference;
-    FirebaseUser userMe;
-    User userMoi;
-    Intent intent;
-    TextView username;
+    DatabaseReference databaseReference;
     Button btn_send;
     EditText txt_send;
-    @Override
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -60,14 +56,14 @@ public class MessageFragment extends AppCompatActivity {
         mMessageAdapter = new MessageAdapter(this, messageList);
         mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
         mMessageRecycler.setAdapter(mMessageAdapter);
-        reference = FirebaseDatabase.getInstance().getReference("Users");
-        userMe = FirebaseAuth.getInstance().getCurrentUser();
+
+
         //username = findViewById(R.id.text_gchat_username);
-        btn_send = findViewById(R.id.button_gchat_send);
-        txt_send = findViewById(R.id.edit_gchat_message);
+        /*btn_send = findViewById(R.id.button_gchat_send);
+        txt_send = findViewById(R.id.edit_gchat_message);*/
 
 
-        reference.addValueEventListener(new ValueEventListener() {
+        /*reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
@@ -79,7 +75,7 @@ public class MessageFragment extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
 
 
     }
