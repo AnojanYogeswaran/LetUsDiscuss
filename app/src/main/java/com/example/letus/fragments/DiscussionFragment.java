@@ -1,18 +1,20 @@
-package com.example.letus;
+package com.example.letus.fragments;
 
 import android.os.Bundle;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.letus.adapter.DiscussionAdapter;
+import com.example.letus.R;
 import com.example.letus.model.DiscussionModel;
 
 import java.util.ArrayList;
 
-public class DiscussionActivity extends AppCompatActivity {
+public class DiscussionFragment extends AppCompatActivity {
 
     ArrayList<DiscussionModel> discussions = new ArrayList<DiscussionModel>();
-    ListView listViewdiscussion;
+    ListView listViewDiscussion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +26,9 @@ public class DiscussionActivity extends AppCompatActivity {
         discussions.add(new DiscussionModel("Anojan", "ta avancé sur le mémoire ?", "le 12/02/2022"));
 
 
-        listViewdiscussion = (ListView) findViewById(R.id.listViewDiscussion);
+        listViewDiscussion = (ListView) findViewById(R.id.listViewDiscussion);
         DiscussionAdapter adapter = new DiscussionAdapter(discussions, this);
-        listViewdiscussion.setAdapter(adapter);
+        listViewDiscussion.setAdapter(adapter);
 
     }
 }

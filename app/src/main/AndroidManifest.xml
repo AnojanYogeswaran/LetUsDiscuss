@@ -35,6 +35,10 @@
             android:name=".fragments.MessageFragment"
             >
         </activity>
+        <activity
+            android:name=".fragments.DiscussionFragment"
+            >
+        </activity>
     </application>
 
 </manifest>

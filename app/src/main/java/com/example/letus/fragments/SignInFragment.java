@@ -151,7 +151,7 @@ public class SignInFragment extends AppCompatActivity implements View.OnClickLis
         @Override
         public void onComplete(@NonNull Task<AuthResult> task) {
             if(task.isSuccessful()) {
-                User user = new User(Login , Email , birthDate);
+                User user = new User(Login , Email);
                 FirebaseDatabase.getInstance().getReference("users")
                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -176,7 +176,7 @@ public class SignInFragment extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case    R.id.buttonSaveContact:
+            case R.id.buttonSaveContact:
                 registerUser();
                 break;
         }

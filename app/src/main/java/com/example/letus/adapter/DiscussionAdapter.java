@@ -1,4 +1,4 @@
-package com.example.letus;
+package com.example.letus.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 
+import com.example.letus.R;
 import com.example.letus.model.DiscussionModel;
 
 import java.util.ArrayList;
@@ -43,7 +44,6 @@ public class DiscussionAdapter extends BaseAdapter {
         if(view == null){
             view = LayoutInflater.from(context).inflate(R.layout.itemdiscution, viewGroup,false);
         }
-
 
         TextView firstname= view.findViewById(R.id.textViewItemPrenom);
         firstname.setText(discussions.get(i).getFirstname());

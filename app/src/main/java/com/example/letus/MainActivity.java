@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.example.letus.fragments.ProfileFragment;
+
+import com.example.letus.fragments.DiscussionFragment;
+import com.example.letus.fragments.MessageFragment;
 import com.example.letus.fragments.SignInFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                      if(task.isSuccessful()) {
                         Toast.makeText(MainActivity.this , "Login Succes", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this , ProfileFragment.class);
+                        Intent intent = new Intent(MainActivity.this , MessageFragment.class);
                         startActivity(intent);
                      }
                 }

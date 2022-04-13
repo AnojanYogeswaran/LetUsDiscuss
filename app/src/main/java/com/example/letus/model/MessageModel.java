@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class MessageModel {
     String message;
-    Date sentAt;
+    int sentAt;
     User sender;
-    User receiver;
 
-    public MessageModel(String message, Date sentAt, User sender) {
+
+    public MessageModel(String message, int sentAt, User sender) {
         this.message = message;
         this.sentAt = sentAt;
         this.sender = sender;
-        this.receiver= receiver;
+
     }
 
     public String getMessage() {
@@ -23,11 +23,11 @@ public class MessageModel {
         this.message = message;
     }
 
-    public Date getSentAt() {
+    public int getSentAt() {
         return sentAt;
     }
 
-    public void setSentAt(Date sentAt) {
+    public void setSentAt(int sentAt) {
         this.sentAt = sentAt;
     }
 
@@ -39,11 +39,4 @@ public class MessageModel {
         this.sender = sender;
     }
 
-    public User getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(User receiver) {
-        this.receiver = receiver;
-    }
 }
