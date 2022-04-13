@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">LetUsDiscuss</string>
     <string name="sign_in">SIGN IN</string>
+    <string name="forgot_pass">Forgot Password</string>
+    <string name="agree">Agree</string>
+    <string name="create_account">Create Account</string>
 </resources>
