@@ -7,11 +7,19 @@
     android:orientation="vertical"
     tools:context="com.example.letus.MainActivity">
 
+    <TextView
+        android:id="@+id/textViewTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="TextView" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         >
+
         <EditText
             android:id="@+id/editTextSearch"
             android:layout_width="0dp"

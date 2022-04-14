@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +18,14 @@ import com.example.letus.MainActivity;
 import com.example.letus.adapter.DiscussionAdapter;
 import com.example.letus.R;
 import com.example.letus.model.DiscussionModel;
+import com.example.letus.model.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -23,7 +34,12 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
     ArrayList<DiscussionModel> discussions = new ArrayList<DiscussionModel>();
     ListView listViewDiscussion;
     ImageButton addConv;
+    EditText editTextSearch;
+    TextView textViewTest;
     int selectedItem;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    DatabaseReference reference;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +56,8 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
         listViewDiscussion.setAdapter(adapter);
         registerForContextMenu(listViewDiscussion);
         listViewDiscussion.setOnItemClickListener(this);
+        editTextSearch = findViewById(R.id.editTextSearch);
+        textViewTest = findViewById(R.id.textViewTest);
 
         addConv = (ImageButton) findViewById(R.id.imageAddDiscu);
 
@@ -67,7 +85,28 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
                 return true;
             }
         });
+
+        id = user.getUid();
+        reference = FirebaseDatabase.getInstance().getReference().child("users").child(id);
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    String username = snapshot.child("login").getValue().toString();
+                    textViewTest.setText("Coucou " + "  " +  username + " ID : " + id);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
+
     @Override
     public void onClick(View view) {
 
