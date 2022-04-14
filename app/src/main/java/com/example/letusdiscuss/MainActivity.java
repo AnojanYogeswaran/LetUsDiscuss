@@ -1,8 +1,10 @@
 package com.example.letusdiscuss;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ListView listViewdiscussion;
     int selecteditem;
     ImageButton addConv;
+    DiscussionAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,36 +32,47 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_discussion);
 
         discussions.add(new DiscussionModel("Joan","qui sont les con qui on voté macron","le 11/04/2022"));
-        discussions.add(new DiscussionModel("Chris","vien on Aram","le 08/04/2022"));
+        discussions.add(new DiscussionModel("Chris","vien sur LOL on va Aram","le 08/04/2022"));
         discussions.add(new DiscussionModel("Anojan","ta avancé sur le mémoire ?","le 12/02/2022"));
 
 
 
         listViewdiscussion = (ListView) findViewById(R.id.listViewDiscussion);
-        DiscussionAdapter adapter = new DiscussionAdapter(discussions, this);
+        adapter = new DiscussionAdapter(discussions, this);
         listViewdiscussion.setAdapter(adapter);
 
         registerForContextMenu(listViewdiscussion);
         listViewdiscussion.setOnItemClickListener(this);
 
         addConv = (ImageButton) findViewById(R.id.imageAddDiscu);
-        
 
 
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.layout_context_menu,menu);
-        return true;
-    }
+        listViewdiscussion.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int
+                    position, long id) {
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.menuItem_delete){
-            discussions.remove(selecteditem);
-        }
-        return super.onOptionsItemSelected(item);
+                // it will get the position of selected item from the ListView
+
+                new AlertDialog.Builder(MainActivity.this)
+                        .setIcon(android.R.drawable.ic_menu_delete)
+                        .setTitle("Are you sure...")
+                        .setMessage("Do you want to delete the selected item..?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                discussions.remove(selecteditem);
+                                adapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton("No" , null).show();
+
+                return true;
+            }
+        });
+
     }
 
     @Override
@@ -66,20 +80,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         selecteditem = i;
         view.post(new Runnable() {
-            @Override
+           // @Override
             public void run() {
-                showPopupMenu(view);
             }
         });
     }
 
-    private void showPopupMenu(View view) {
-
-        PopupMenu popup = new PopupMenu(this, view);
-
-        popup.getMenuInflater().inflate(R.menu.layout_context_menu, popup.getMenu());
-
-        popup.show();
-    }
 }
 
