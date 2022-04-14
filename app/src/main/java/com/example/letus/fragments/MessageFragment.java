@@ -2,6 +2,7 @@ package com.example.letus.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -38,29 +39,57 @@ public class MessageFragment extends AppCompatActivity {
     DatabaseReference databaseReference;
     Button btn_send;
     EditText txt_send;
+    //String login, email, birthDate;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
-        user = new User("Titi","Titi@gmail.com", "546");
+        mMessageAdapter = new MessageAdapter(this, messageList);
+        /*databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Get Post object and use the values to update the UI
+
+                String login=snapshot.child("login").getValue(String.class).toString() ;
+                String email=snapshot.child("email").getValue(String.class).toString();
+                String birthDate=snapshot.child("birthdate").getValue(String.class ).toString();
 
 
+                // ..
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });*/
+        user = new User("Hello","hello@gmail.com", "23 janvier 2001");
         messageList.add(new MessageModel("Salut mec", 80, user));
-        messageList.add(new MessageModel("Mange tes morts", 80, user ));
+        messageList.add(new MessageModel("Mange tes morts", 80, user));
+
+
+
+
+
         //String userid = getIntent().getStringExtra("userid");
         //messageList.add(new MessageModel("ah ouais t'es cool toi",80,userMoi));
 
         mMessageRecycler = (RecyclerView) findViewById(R.id.recycler_gchat);
-        mMessageAdapter = new MessageAdapter(this, messageList);
+
         mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
         mMessageRecycler.setAdapter(mMessageAdapter);
 
 
         //username = findViewById(R.id.text_gchat_username);
-        /*btn_send = findViewById(R.id.button_gchat_send);
-        txt_send = findViewById(R.id.edit_gchat_message);*/
+        btn_send = findViewById(R.id.button_gchat_send);
+        txt_send = findViewById(R.id.edit_gchat_message);
+        String text = txt_send.getText().toString();
+
+
 
 
         /*reference.addValueEventListener(new ValueEventListener() {
@@ -80,6 +109,16 @@ public class MessageFragment extends AppCompatActivity {
 
     }
 
+    /*@Override
+    public void onClick(View view) {
+        Button b= (Button) view;
+        btn_send = findViewById(R.id.button_gchat_send);
+        txt_send = findViewById(R.id.edit_gchat_message);
+        String text = txt_send.getText().toString();
+            MessageModel message = new MessageModel(text,userMe);
+            startActivity(intent);
+        }
+    }*/
 
 
 }

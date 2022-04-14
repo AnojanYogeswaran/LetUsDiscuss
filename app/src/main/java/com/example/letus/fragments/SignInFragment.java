@@ -142,6 +142,7 @@ public class SignInFragment extends AppCompatActivity implements View.OnClickLis
     String Password = editTextPassword.getText().toString();
     String ConfirmPass = editTextConfirmPassword.getText().toString();
     String birthDate = editTextBirthDate.getText().toString();
+    String id;
 
     if(Email.isEmpty() || Login.isEmpty() || Password.isEmpty() || ConfirmPass.isEmpty() || birthDate.isEmpty()) {
         Toast.makeText(SignInFragment.this , "Tous les champs sont requis" , Toast.LENGTH_SHORT).show();

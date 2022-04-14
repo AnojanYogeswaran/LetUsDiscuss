@@ -79,13 +79,14 @@ public class MainActivity extends AppCompatActivity {
 
         if(Email.isEmpty() || Password.isEmpty()) {
             Toast.makeText(MainActivity.this , "Veuillez remplir tout les champs", Toast.LENGTH_SHORT).show();
-        } else {
+        }
+        else {
             nAuth.signInWithEmailAndPassword(Email , Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                      if(task.isSuccessful()) {
-                        Toast.makeText(MainActivity.this , "Login Succes", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this , MessageFragment.class);
+                        Toast.makeText(MainActivity.this , "Login Success", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this , DiscussionFragment.class);
                         startActivity(intent);
                      }
                 }

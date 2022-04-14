@@ -1,17 +1,21 @@
 package com.example.letus.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.letus.MainActivity;
 import com.example.letus.adapter.DiscussionAdapter;
 import com.example.letus.R;
 import com.example.letus.model.DiscussionModel;
 
 import java.util.ArrayList;
 
-public class DiscussionFragment extends AppCompatActivity {
+public class DiscussionFragment extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener{
 
     ArrayList<DiscussionModel> discussions = new ArrayList<DiscussionModel>();
     ListView listViewDiscussion;
@@ -29,6 +33,17 @@ public class DiscussionFragment extends AppCompatActivity {
         listViewDiscussion = (ListView) findViewById(R.id.listViewDiscussion);
         DiscussionAdapter adapter = new DiscussionAdapter(discussions, this);
         listViewDiscussion.setAdapter(adapter);
+        listViewDiscussion.setOnItemClickListener(this);
 
+    }
+    @Override
+    public void onClick(View view) {
+
+    }
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        DiscussionModel discussion = discussions.get(i);
+        Intent intent = new Intent(this , MessageFragment.class);
+        startActivity(intent);
     }
 }
