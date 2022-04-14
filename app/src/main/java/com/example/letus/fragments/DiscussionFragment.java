@@ -1,11 +1,14 @@
 package com.example.letus.fragments;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.letus.MainActivity;
@@ -19,6 +22,8 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
 
     ArrayList<DiscussionModel> discussions = new ArrayList<DiscussionModel>();
     ListView listViewDiscussion;
+    ImageButton addConv;
+    int selectedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +38,35 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
         listViewDiscussion = (ListView) findViewById(R.id.listViewDiscussion);
         DiscussionAdapter adapter = new DiscussionAdapter(discussions, this);
         listViewDiscussion.setAdapter(adapter);
+        registerForContextMenu(listViewDiscussion);
         listViewDiscussion.setOnItemClickListener(this);
 
+        addConv = (ImageButton) findViewById(R.id.imageAddDiscu);
+
+        listViewDiscussion.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int
+                    position, long id) {
+
+                // it will get the position of selected item from the ListView
+
+                new AlertDialog.Builder(DiscussionFragment.this)
+                        .setIcon(android.R.drawable.ic_menu_delete)
+                        .setTitle("Are you sure...")
+                        .setMessage("Do you want to delete the selected item..?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                discussions.remove(selectedItem);
+                                adapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton("No" , null).show();
+
+                return true;
+            }
+        });
     }
     @Override
     public void onClick(View view) {
@@ -42,6 +74,13 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
     }
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        selectedItem = i;
+        view.post(new Runnable() {
+            // @Override
+            public void run() {
+            }
+        });
+
         DiscussionModel discussion = discussions.get(i);
         Intent intent = new Intent(this , MessageFragment.class);
         startActivity(intent);
