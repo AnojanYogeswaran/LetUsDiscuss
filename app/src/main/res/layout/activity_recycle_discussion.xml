@@ -7,19 +7,11 @@
     android:orientation="vertical"
     tools:context="com.example.letus.MainActivity">
 
-    <TextView
-        android:id="@+id/textViewTest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#fff"
-        android:text="TextView" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         >
-
         <EditText
             android:id="@+id/editTextSearch"
             android:layout_width="0dp"
@@ -38,8 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/listViewDiscussion"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listViewRecycleDiscussion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="12"

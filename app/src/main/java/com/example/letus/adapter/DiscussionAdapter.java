@@ -10,15 +10,16 @@ import android.widget.TextView;
 
 import com.example.letus.R;
 import com.example.letus.model.DiscussionModel;
+import com.example.letus.model.User;
 
 import java.util.ArrayList;
 
 public class DiscussionAdapter extends BaseAdapter {
 
-    private ArrayList<DiscussionModel> discussions;
+    private ArrayList<User> discussions;
     private Context context;
 
-    public DiscussionAdapter(ArrayList<DiscussionModel> discussions, Context context) {
+    public DiscussionAdapter(ArrayList<User> discussions, Context context) {
         this.discussions = discussions;
         this.context = context;
     }
@@ -46,14 +47,15 @@ public class DiscussionAdapter extends BaseAdapter {
         }
 
         TextView firstname= view.findViewById(R.id.textViewItemPrenom);
-        firstname.setText(discussions.get(i).getFirstname());
+        firstname.setText(discussions.get(i).getLogin());
 
-        TextView lastMessage = view.findViewById(R.id.textViewItemPreviewMessage);
-        lastMessage.setText(discussions.get(i).getLastmessage());
+        //TextView lastMessage = view.findViewById(R.id.textViewItemPreviewMessage);
+        //lastMessage.setText(discussions.get(i).getLastmessage());
 
-        TextView date = view.findViewById(R.id.textViewItemDate);
-        date.setText(discussions.get(i).getDate());
+        //TextView date = view.findViewById(R.id.textViewItemDate);
+        //date.setText(discussions.get(i).getDate());
 
         return view;
     }
+
 }
