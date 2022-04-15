@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -33,7 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class DiscussionFragment extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener{
+public class DiscussionFragment extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     ArrayList<DiscussionModel> discussions = new ArrayList<DiscussionModel>();
     ListView listViewDiscussion;
@@ -49,12 +50,16 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
     String theLastMessage;
     TextView lastMsg;
     Date date = new Date();
+    Button profile;
+    ImageButton buttonSearch;
+    EditText searchText;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_discussion);
         mUsers = new ArrayList<User>();
         /*discussions.add(new DiscussionModel("Joan", "qui sont les con qui on voté macron", "le 11/04/2022"));
@@ -70,9 +75,17 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
         listViewDiscussion.setOnItemClickListener(this);
         editTextSearch = findViewById(R.id.editTextSearch);
         //textViewTest = findViewById(R.id.textViewTest);
-
+        buttonSearch = (ImageButton) findViewById(R.id.imageButtonSearch);
+        searchText = (EditText) findViewById(R.id.editTextSearch);
         lastMsg = (TextView) findViewById(R.id.textViewItemPreviewMessage);
+        buttonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                search(searchText.getText().toString());
 
+
+            }
+        });
 
         addConv = (ImageButton) findViewById(R.id.imageAddDiscu);
 
@@ -90,13 +103,12 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
                         .setMessage("Do you want to delete the selected item..?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which)
-                            {
+                            public void onClick(DialogInterface dialog, int which) {
                                 discussions.remove(selectedItem);
                                 adapter.notifyDataSetChanged();
                             }
                         })
-                        .setNegativeButton("No" , null).show();
+                        .setNegativeButton("No", null).show();
 
                 return true;
             }
@@ -108,7 +120,7 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
                     String username = snapshot.child("login").getValue().toString();
                     //textViewTest.setText("Coucou " + "  " +  username + " ID : " + id);
                 }
@@ -127,6 +139,7 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
 
     }
+
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         selectedItem = i;
@@ -137,7 +150,7 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
         });
 
         User user = mUsers.get(i);
-        Intent intent = new Intent(this , MessageFragment.class);
+        Intent intent = new Intent(this, MessageFragment.class);
         Bundle bundle = new Bundle();
         bundle.putString("userid", user.getId());
         bundle.putString("userlogin", user.getLogin());
@@ -145,29 +158,28 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
         startActivity(intent);
     }
 
-    private void readUsers(){
+    private void readUsers() {
         FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mUsers.clear();
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String login = (String) dataSnapshot.child("login").getValue();
                     String email = (String) dataSnapshot.child("email").getValue();
                     String birthdate = (String) dataSnapshot.child("birthDate").getValue();
                     String id = dataSnapshot.getKey();
                     User user = new User(login, email, birthdate, id);
-                    if(!(user.getId().equals(fuser.getUid()))){
+                    if (!(user.getId().equals(fuser.getUid()))) {
 
                         mUsers.add(user);
-                        lastMessage(id, lastMsg);
 
                     }
 
                 }
 
-                adapter = new DiscussionAdapter(mUsers,getApplicationContext());
+                adapter = new DiscussionAdapter(mUsers, getApplicationContext());
                 listViewDiscussion.setAdapter(adapter);
             }
 
@@ -177,47 +189,37 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
             }
         });
     }
-    private void lastMessage(final String userid, final TextView last_msg){
-        theLastMessage = "default";
 
-        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("chats");
+
+
+    public void search(String searchUser) {
+        FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users");
         reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    String msg = (String) dataSnapshot.child("message").getValue();
-                    String receiver = (String) dataSnapshot.child("receiver").getValue();
-                    String sender = (String) dataSnapshot.child("sender").getValue();
-                    String sentAt = (String) dataSnapshot.child("sentAt").getValue();
-                    MessageModel message = new MessageModel(msg,receiver,sender,sentAt);
-                    if (firebaseUser != null && message != null) {
-                        if (message.getReceiver().equals(firebaseUser.getUid()) && message.getSender().equals(userid) ||
-                                message.getReceiver().equals(userid) && message.getSender().equals(firebaseUser.getUid())) {
-                            theLastMessage = message.getMessage();
-                        }
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mUsers.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String login = (String) dataSnapshot.child("login").getValue();
+                    String email = (String) dataSnapshot.child("email").getValue();
+                    String birthdate = (String) dataSnapshot.child("birthDate").getValue();
+                    String id = dataSnapshot.getKey();
+                    User user = new User(login, email, birthdate, id);
+                    if (!(user.getId().equals(fuser.getUid())) && user.getLogin().contains(searchUser)) {
+
+                        mUsers.add(user);
                     }
+
                 }
-            if(last_msg!= null) {
-                switch (theLastMessage) {
-                    case "default":
-                        last_msg.setText("No Message");
-                        break;
-                    default:
-                        last_msg.setText(theLastMessage);
-                        break;
-                }
-            }
-                theLastMessage = "default";
+                adapter = new DiscussionAdapter(mUsers, getApplicationContext());
+                listViewDiscussion.setAdapter(adapter);
+
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
     }
-
-
-
 }

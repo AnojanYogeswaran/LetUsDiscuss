@@ -22,7 +22,7 @@
             android:layout_weight="6"></EditText>
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/imageButtonSearch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -41,7 +41,15 @@
             android:layout_weight="12"
             tools:listitem="@layout/itemdiscution" />
 
+        <Button
+            android:id="@+id/buttonprofileUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
 
+            />
         <ImageButton
             android:id="@+id/imageAddDiscu"
             android:layout_width="wrap_content"
