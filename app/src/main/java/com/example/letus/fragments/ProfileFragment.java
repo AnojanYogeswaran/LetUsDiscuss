@@ -34,6 +34,7 @@ public class ProfileFragment extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
         DecoButton = (Button) findViewById(R.id.buttonDeco);

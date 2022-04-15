@@ -38,7 +38,7 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
     ListView listViewDiscussion;
     ImageButton addConv;
     EditText editTextSearch;
-    TextView textViewTest;
+    //TextView textViewTest;
     int selectedItem;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     DatabaseReference reference;
@@ -51,6 +51,7 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discussion);
         mUsers = new ArrayList<User>();
@@ -66,7 +67,7 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
         registerForContextMenu(listViewDiscussion);
         listViewDiscussion.setOnItemClickListener(this);
         editTextSearch = findViewById(R.id.editTextSearch);
-        textViewTest = findViewById(R.id.textViewTest);
+        //textViewTest = findViewById(R.id.textViewTest);
 
         lastMsg = (TextView) findViewById(R.id.textViewItemPreviewMessage);
 
@@ -107,7 +108,7 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     String username = snapshot.child("login").getValue().toString();
-                    textViewTest.setText("Coucou " + "  " +  username + " ID : " + id);
+                    //textViewTest.setText("Coucou " + "  " +  username + " ID : " + id);
                 }
 
             }

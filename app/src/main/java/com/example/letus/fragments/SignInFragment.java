@@ -52,6 +52,7 @@ public class SignInFragment extends AppCompatActivity implements View.OnClickLis
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         buttonCreateAcc = (Button) findViewById(R.id.buttonSaveContact);
