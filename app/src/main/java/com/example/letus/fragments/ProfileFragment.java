@@ -57,7 +57,7 @@ public class ProfileFragment extends AppCompatActivity {
                 User profile = snapshot.getValue(User.class);
                 if (profile != null) {
                     String username = profile.login;
-                    String email = profile.Email;
+                    String email = profile.email;
                     String birthdate = profile.birthDate;
 
                     textViewEmail.setText(email);

@@ -3,26 +3,26 @@ package com.example.letus.model;
 import android.provider.ContactsContract;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.io.Serializable;
 
 public class DiscussionModel implements Serializable {
 
-    private String firstname,lastmessage, date;
+
+    private String lastmessage, date;
+    private FirebaseUser fuser;
+    private User user;
     ImageView imageProfil;
 
-    public DiscussionModel(String firstname, String lastmessage, String date) {
-        this.firstname = firstname;
-        this.lastmessage = lastmessage;
-        this.date = date;
+    public DiscussionModel(User user) {
+        this.user = user;
+        //this.lastmessage = lastmessage;
+        //this.date = date;
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
     }
 
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
 
     public String getLastmessage() {
         return lastmessage;

@@ -35,16 +35,17 @@ public class MessageAdapter extends RecyclerView.Adapter {
     private ArrayList<MessageModel> mMessageList;
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 0;
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
-    private FirebaseUser user;
+
 
     public MessageAdapter(Context context, ArrayList<MessageModel> messageList) {
         mContext = context;
         mMessageList = messageList;
-        user = FirebaseAuth.getInstance().getCurrentUser();
+
     }
-    @NonNull
+
+
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
 
         if (viewType == VIEW_TYPE_MESSAGE_SENT) {
@@ -60,8 +61,8 @@ public class MessageAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        MessageModel message =  mMessageList.get(position);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        MessageModel message = mMessageList.get(position);
 
         switch (holder.getItemViewType()) {
             case VIEW_TYPE_MESSAGE_SENT:
@@ -79,8 +80,9 @@ public class MessageAdapter extends RecyclerView.Adapter {
     }
 
     public int getItemViewType(int position){
+        FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
         MessageModel message = (mMessageList.get(position));
-        if (message.getSender().getEmail().equals(this.user.getEmail())){
+        if (message.getSender().equals(fUser.getUid())){
             return VIEW_TYPE_MESSAGE_SENT;
         }
         else
@@ -105,7 +107,21 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
         // Format the stored timestamp into a readable String using method.
         //timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
-        nameText.setText(message.getSender().getLogin());
+        /*reference.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User profile = snapshot.getValue(User.class);
+                if (profile != null) {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });*/
+
 
         // Insert the profile image from the URL into the ImageView.
         //Utils.displayRoundImageFromUrl(mContext, message.getSender().getProfileUrl(), profileImage);

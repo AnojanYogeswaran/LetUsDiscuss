@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.letus.fragments.DiscussionFragment;
 import com.example.letus.fragments.SignInFragment;
+import com.example.letus.fragments.UsersFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
