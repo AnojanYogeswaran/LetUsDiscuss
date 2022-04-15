@@ -31,7 +31,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class MessageFragment extends AppCompatActivity {
@@ -51,7 +53,12 @@ public class MessageFragment extends AppCompatActivity {
 
 
     //String login, email, birthDate;
-
+    Date date = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss");
+    SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM.yyyy");
+    SimpleDateFormat sdfHour = new SimpleDateFormat("HH:mm");
+    String currentDateandTime = sdf.format(new Date());
+    String strDate = sdf.format(date);
 
 
     @Override
@@ -99,7 +106,7 @@ public class MessageFragment extends AppCompatActivity {
                 String msg = txt_send.getText().toString();
                 if (!msg.equals("")){
                     sendMessage(fuser.getUid(),userid,msg);
-                    MessageModel nMsg = new MessageModel(msg,userid,fuser.getUid(),20);
+                    MessageModel nMsg = new MessageModel(msg,userid,fuser.getUid(),strDate);
                     messageList.add(nMsg);
                     mMessageRecycler.setAdapter(mMessageAdapter);
 
@@ -161,7 +168,7 @@ public class MessageFragment extends AppCompatActivity {
         hashMap.put("sender", sender);
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
-        hashMap.put("sentAt", 50);
+        hashMap.put("sentAt", strDate);
         FirebaseDatabase.getInstance().getReference().child("chats").push().setValue(hashMap);
     }
 
@@ -176,7 +183,7 @@ public class MessageFragment extends AppCompatActivity {
                     String msg = (String) dataSnapshot.child("message").getValue();
                     String receiver = (String) dataSnapshot.child("receiver").getValue();
                     String sender = (String) dataSnapshot.child("sender").getValue();
-                    long sentAt = (long) dataSnapshot.child("sentAt").getValue();
+                    String sentAt = (String) dataSnapshot.child("sentAt").getValue();
                     MessageModel message = new MessageModel(msg,receiver,sender,sentAt);
 
                     if((message.getReceiver().equals(myid) && message.getSender().equals(userid)) ||

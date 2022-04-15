@@ -31,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DiscussionFragment extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener{
 
@@ -47,6 +48,7 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
     DiscussionAdapter adapter;
     String theLastMessage;
     TextView lastMsg;
+    Date date = new Date();
 
 
     @Override
@@ -187,7 +189,7 @@ public class DiscussionFragment extends AppCompatActivity implements View.OnClic
                     String msg = (String) dataSnapshot.child("message").getValue();
                     String receiver = (String) dataSnapshot.child("receiver").getValue();
                     String sender = (String) dataSnapshot.child("sender").getValue();
-                    long sentAt = (long) dataSnapshot.child("sentAt").getValue();
+                    String sentAt = (String) dataSnapshot.child("sentAt").getValue();
                     MessageModel message = new MessageModel(msg,receiver,sender,sentAt);
                     if (firebaseUser != null && message != null) {
                         if (message.getReceiver().equals(firebaseUser.getUid()) && message.getSender().equals(userid) ||

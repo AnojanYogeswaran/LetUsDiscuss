@@ -1,15 +1,13 @@
 package com.example.letus.model;
 
-import java.util.Date;
-
 public class MessageModel {
     String message;
     String receiver;
     String sender;
-    long sentAt;
+    String sentAt;
 
 
-    public MessageModel(String message, String receiver,String sender,long sentAt) {
+    public MessageModel(String message, String receiver,String sender,String sentAt) {
         this.message = message;
         this.receiver = receiver;
         this.sender = sender;
@@ -25,11 +23,11 @@ public class MessageModel {
         this.message = message;
     }
 
-    public long getSentAt() {
+    public String getSentAt() {
         return sentAt;
     }
 
-    public void setSentAt(int sentAt) {
+    public void setSentAt(String sentAt) {
         this.sentAt = sentAt;
     }
 

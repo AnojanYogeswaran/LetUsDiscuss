@@ -40,7 +40,7 @@ public class UsersFragment extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        getSupportActionBar().hide();cd An  
+        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycle_discussion);
         userAdapter = new UserAdapter(this, mUsers);
